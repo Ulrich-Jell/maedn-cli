@@ -1,6 +1,6 @@
 import sys
 from termcolor import colored, cprint
-import maedn
+
 
 ########## Creation of the Players ##########
 class Player():
