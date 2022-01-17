@@ -6,9 +6,11 @@ from termcolor import colored, cprint
 
 print_board()
 
-active_player =one
-position_check(active_player.team)
-one1.move()
+active_player = four
+dice_check(active_player.team)
+start_check(active_player.team)
+
+#one1.move()
 
 
 
