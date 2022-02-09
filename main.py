@@ -6,11 +6,24 @@ from termcolor import colored, cprint
 
 print_board()
 
-active_player = four
+print(active_player.name)
 dice_check(active_player.team)
-start_check(active_player.team)
+next_player()
+
+print(active_player.name)
+dice_check(active_player.team)
+next_player()
+
+dice_check(active_player.team)
+next_player()
+
+dice_check(active_player.team)
+next_player()
+#start_check(active_player.team)
 
 #one1.move()
+
+next_player()
 
 
 

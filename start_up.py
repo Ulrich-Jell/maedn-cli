@@ -17,21 +17,22 @@ with open("brett.csv", "r") as file:
 
 ########## Creation of the Players ##########
 class Player():
-    def __init__(self, team, color, played_by, start):#, route, goal):
+    def __init__(self, team, color, played_by, start, name):
         self.team = team
         self.color = color
         self.played_by = played_by
         self.start = start
+        self.name = name
 
 team1 = []
 team2 = []
 team3 = []
 team4 = []
 
-one = Player(team1, "red", "human", colored(board[0][12], "grey", "on_red"))
-two = Player(team2, "green", "human", board[12][20])
-three = Player(team3, "blue", "human", board[20][8])
-four = Player(team4, "yellow", "human", board[8][0])
+one = Player(team1, "red", "human", colored(board[0][12], "grey", "on_red"), "one")
+two = Player(team2, "green", "human", colored(board[12][20], "grey", "on_green"), "two")
+three = Player(team3, "blue", "human", colored(board[20][8], "grey", "on_blue"), "three")
+four = Player(team4, "yellow", "human", colored(board[8][0], "grey", "on_yellow"),"four")
 
 ########## Coloring of the board ##########
 board[2][15] = colored(board[2][15], one.color)
