@@ -1,4 +1,4 @@
-from board import *
+from start_up import *
 
 route = {
 0:board[0][12],
