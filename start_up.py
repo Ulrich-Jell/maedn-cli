@@ -34,6 +34,9 @@ two = Player(team2, "green", "human", colored(board[12][20], "grey", "on_green")
 three = Player(team3, "blue", "human", colored(board[20][8], "grey", "on_blue"), "three")
 four = Player(team4, "yellow", "human", colored(board[8][0], "grey", "on_yellow"),"four")
 
+global active_player
+active_player = one
+
 ########## Coloring of the board ##########
 board[2][15] = colored(board[2][15], one.color)
 board[2][17] = colored(board[2][17], one.color)

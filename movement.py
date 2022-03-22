@@ -5,11 +5,10 @@ from start_up import *
 from termcolor import colored, cprint
 from time import sleep
 
-global active_player
-active_player = four
+
    
 class Meeple():
-    def __init__(self, player, no,  home, route, progress, x_pos, y_pos, old_pos):#, name):
+    def __init__(self, player, no,  home, route, progress, x_pos, y_pos, old_pos):
         self.player = player
         self.no = no
         self.home = home
@@ -18,7 +17,7 @@ class Meeple():
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.old_pos = old_pos
-        #self.name = name
+
         
 
     def move(self, dice):               
@@ -32,7 +31,7 @@ class Meeple():
             if dice == 6:
                 start_check(self.player.team)
             else:
-                print("nächster spieler")
+                next_player()
         else:
             print("geht nicht")
 
@@ -44,9 +43,13 @@ class Meeple():
         self.y_pos =self.route[self.progress][1] # route1[1][1] => 12
         self.old_pos = board[self.x_pos][self.y_pos]
         board[self.x_pos][self.y_pos] = colored(self.no, self.player.color)
+        clear_screen()
+
+def clear_screen():        
         os.system('cls' if os.name == 'nt' else 'clear')
 
 def next_player():
+    global active_player
     if active_player.name == "four":
         active_player = one
         
@@ -56,13 +59,12 @@ def next_player():
         active_player = players[(players.index(active_player)) + 1]
 
     print("Player ", active_player.name, ". It's your turn.")
+    input("Press any key to continue")
+    dice_check(active_player.team)
 
 def dice_check(team):
-    #from main import active_player
     t = []
-    print(t)
     for m in team:
-        print(m.progress)
         if m.progress != "H":
             t.append(True)
         else:
@@ -78,7 +80,7 @@ def dice_check(team):
         d.append(random.randint(1, 6))
         d.append(random.randint(1, 6))
         d.append(random.randint(6, 6))
-        print("Player " + active_player.name + " rolls a "+ str(d[0]), " a " + str(d[1]) + " and a " + str(d[2]))
+        print("Player " + active_player.name + " rolls a "+ str(d[0]), ", a " + str(d[1]) + " and a " + str(d[2]))
         
         if 6 in d:
             input("Press any key to move one meeple out of the start")
@@ -90,6 +92,7 @@ def dice_check(team):
                     m.y_pos =m.route[0][1]
                     board[m.x_pos][m.y_pos] = colored(m.no, "grey", "on_" + str(m.player.color))
                     m.old_pos = colored("()", "grey", "on_"+str(m.player.color))
+                    clear_screen()
                     print_board()
                     r = random.randint(1,5)
                     print("Player " + active_player.name + " rolls a " + str(r))
@@ -100,6 +103,9 @@ def dice_check(team):
         else:
             print("Unfortunately, you did not roll a 6.")
             input("Press any key to let the next player continue.")
+            clear_screen()
+            print_board()
+            next_player()
 
 def start_check(team):
     t = []
