@@ -5,8 +5,11 @@ from time import sleep
 from termcolor import colored, cprint
 
 print_board()
+turn(active_player.team)
 
-dice_check(active_player.team)
+
+
+
 
 
 
