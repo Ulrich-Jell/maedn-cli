@@ -28,6 +28,7 @@ team1 = []
 team2 = []
 team3 = []
 team4 = []
+teams = [team1, team2, team3, team4]
 
 one = Player(team1, "red", "human", colored(board[0][12], "grey", "on_red"), "one")
 two = Player(team2, "green", "human", colored(board[12][20], "grey", "on_green"), "two")
