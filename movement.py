@@ -24,7 +24,7 @@ class Meeple():
         print("move()")
         sleep(1)
         st = compare_meeple_positions(self.x_pos, self.y_pos)
-        gt =compare_meeple_positions((self.route[self.progress +dice][0]),(self.route[self.progress +dice][1]))
+        gt = compare_meeple_positions((self.route[self.progress +dice][0]),(self.route[self.progress +dice][1]))
         #check if goal is empty
         if board[self.route[self.progress +dice][0]][self.route[self.progress +dice][1]] == "()":
             print("Zielfeld frei")
@@ -33,10 +33,8 @@ class Meeple():
                 print_board()
             self.go()
             print_board()
-            if dice == 6:
-                start_check(self.player.team)
-            else:
-                next_player()
+            end_turn(dice)
+
         elif st == gt:
             input("geht nicht")
             p = []
@@ -48,8 +46,10 @@ class Meeple():
                     p[0].move(dice)
                 else:
                     print("Meeple Auswählen")
+                    end_turn(dice)
         else:
             print("Gegner Schlagen")
+            end_turn(dice)
 
     def go(self):
         print("go()")
@@ -96,7 +96,7 @@ def turn(team): #turn of the player
                 input("Press any key to continue")
                 team[t.index(True)].move(dice)
         else:
-            dice = random.randint(6, 6)
+            dice = random.randint(1, 6)
             if dice == 6:
                 input("sechs gewürfelt - Figur raus ziehen, wenn möglich.")
                 leave_home(team)
@@ -123,7 +123,7 @@ def turn(team): #turn of the player
             input("Press any key to let the next player continue.")
             clear_screen()
             print_board()
-            next_player()
+            end_turn(d[0])
 
 def leave_home(team):
     for m in team:
@@ -176,12 +176,14 @@ def start_check(team): #Is there a Meeple on "start" and another in "home"?
 def clear_screen():        
         os.system('cls' if os.name == 'nt' else 'clear')
 
-def next_player():
+def end_turn(dice):
     global active_player
+    if dice == 6:
+        turn(active_player)
+    
+
     if active_player.name == "four":
         active_player = one
-        
-   
     else:    
         players = [one, two, three, four]
         active_player = players[(players.index(active_player)) + 1]
@@ -201,7 +203,6 @@ def compare_meeple_positions(a , b): #helper function to get the team of a meepl
     for i in range(4):
         if [a, b] in mp[i]:
             return i
-
 
         
         
